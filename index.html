@@ -1,0 +1,108 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>SellSnap — готовое объявление за 30 секунд</title>
+  <meta name="description" content="Создай готовое объявление для Vinted, eBay и маркетплейсов за 30 секунд.">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header class="nav">
+  <div class="logo">Sell<span>Snap</span></div>
+  <a href="#generator" class="nav-btn">Попробовать бесплатно</a>
+</header>
+
+<main>
+  <section class="hero">
+    <div class="badge">⚡ Бесплатный генератор</div>
+    <h1>Из пары слов —<br><span>готовое объявление</span></h1>
+    <p>Заполни форму, нажми кнопку — получишь заголовок, описание и теги, которые можно сразу вставить в Vinted, eBay или другой маркетплейс.</p>
+    <a class="cta" href="#generator">Создать объявление →</a>
+    <div class="proof"><span>✓</span> Без регистрации &nbsp; <span>✓</span> Без переписки &nbsp; <span>✓</span> Результат сразу</div>
+  </section>
+
+  <section id="generator" class="app">
+    <div class="panel">
+      <div class="panel-head">
+        <div><small>ШАГ 1</small><h2>Что продаёшь?</h2></div>
+        <div class="counter" id="counter">0/6</div>
+      </div>
+
+      <label>Название товара <span>*</span>
+        <input id="item" maxlength="80" placeholder="Например: Nike Air Max 90">
+      </label>
+
+      <div class="grid">
+        <label>Категория
+          <select id="category">
+            <option>Одежда</option><option>Обувь</option><option>Электроника</option>
+            <option>Мебель</option><option>Красота</option><option>Спорт</option><option>Другое</option>
+          </select>
+        </label>
+        <label>Состояние
+          <select id="condition">
+            <option>Новое</option><option>Как новое</option><option>Очень хорошее</option><option>Хорошее</option><option>Есть следы использования</option>
+          </select>
+        </label>
+      </div>
+
+      <div class="grid">
+        <label>Бренд
+          <input id="brand" maxlength="40" placeholder="Nike, Apple, IKEA...">
+        </label>
+        <label>Размер / модель
+          <input id="size" maxlength="40" placeholder="M, 42, 128GB...">
+        </label>
+      </div>
+
+      <label>Что важно указать?
+        <textarea id="details" maxlength="500" placeholder="Например: купил прошлым летом, надевал 3 раза, без пятен и повреждений..."></textarea>
+      </label>
+
+      <label>Язык объявления
+        <select id="language">
+          <option value="ru">Русский</option>
+          <option value="en">English</option>
+        </select>
+      </label>
+
+      <button id="generate" class="generate">Создать объявление ✨</button>
+      <p class="tiny">Нажимая кнопку, ты создаёшь текст автоматически. Никакой регистрации не требуется.</p>
+    </div>
+
+    <div class="panel result-panel">
+      <div class="panel-head">
+        <div><small>ШАГ 2</small><h2>Твой результат</h2></div>
+        <button id="copyAll" class="copy" disabled>Скопировать всё</button>
+      </div>
+      <div id="empty" class="empty">
+        <div class="empty-icon">✍️</div>
+        <b>Здесь появится объявление</b>
+        <p>Заполни форму слева и нажми «Создать объявление».</p>
+      </div>
+      <div id="result" class="result hidden">
+        <div class="result-block"><div class="result-label">ЗАГОЛОВОК <button data-copy="title">копировать</button></div><div id="outTitle" class="out"></div></div>
+        <div class="result-block"><div class="result-label">ОПИСАНИЕ <button data-copy="description">копировать</button></div><div id="outDescription" class="out"></div></div>
+        <div class="result-block"><div class="result-label">ТЕГИ <button data-copy="tags">копировать</button></div><div id="outTags" class="tags"></div></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="money">
+    <div>
+      <div class="badge">💰 Как на этом зарабатывать</div>
+      <h2>Сам генератор — бесплатный.<br>Деньги можно делать на расширениях.</h2>
+      <p>Когда появится трафик, можно добавить платный пакет: массовая генерация, AI-описания, SEO-заголовки, сохранение шаблонов и экспорт.</p>
+    </div>
+    <div class="price-card">
+      <span>PRO</span><strong>£4.99</strong><small>за месяц</small>
+      <button onclick="alert('Здесь позже подключим Stripe/другую оплату.')">Подключить оплату</button>
+    </div>
+  </section>
+</main>
+
+<footer>SellSnap · Сделано для тех, кто хочет продавать быстрее.</footer>
+<script src="script.js"></script>
+</body>
+</html>
