@@ -1,108 +1,17 @@
-<!doctype html>
-<html lang="ru">
-<head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width,initial-scale=1">
-  <title>SellSnap — готовое объявление за 30 секунд</title>
-  <meta name="description" content="Создай готовое объявление для Vinted, eBay и маркетплейсов за 30 секунд.">
-  <link rel="stylesheet" href="style.css">
-</head>
-<body>
-<header class="nav">
-  <div class="logo">Sell<span>Snap</span></div>
-  <a href="#generator" class="nav-btn">Попробовать бесплатно</a>
-</header>
+<!doctype html><html lang="ru"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>SellSnap v3</title><link rel="stylesheet" href="style.css"></head><body>
+<header><div class="logo">Sell<span>Snap</span></div><div class="stat">Бесплатно: <b id="free">5</b>/5</div></header>
+<main><section class="hero"><span class="badge">SELLSNAP V3</span><h1>Объявление и карточка товара<br><em>в одном месте.</em></h1><p>Текст работает прямо сейчас. Фото-модуль умеет загружать и подготавливать фото; настоящая AI-обработка включится после подключения защищённого сервера.</p></section>
+<nav><button class="tab active" data-tab="text">✍️ Объявление</button><button class="tab" data-tab="photo">🖼️ Карточка товара</button><button class="tab" data-tab="history">🕘 История</button></nav>
 
-<main>
-  <section class="hero">
-    <div class="badge">⚡ Бесплатный генератор</div>
-    <h1>Из пары слов —<br><span>готовое объявление</span></h1>
-    <p>Заполни форму, нажми кнопку — получишь заголовок, описание и теги, которые можно сразу вставить в Vinted, eBay или другой маркетплейс.</p>
-    <a class="cta" href="#generator">Создать объявление →</a>
-    <div class="proof"><span>✓</span> Без регистрации &nbsp; <span>✓</span> Без переписки &nbsp; <span>✓</span> Результат сразу</div>
-  </section>
+<section id="text" class="view active"><div class="grid">
+<div class="card"><h2>Новый товар</h2><label>Название <small id="count">0/60</small><input id="item" maxlength="60" placeholder="Nike Air Max 90"></label><div class="two"><label>Бренд<input id="brand" maxlength="40" placeholder="Nike"></label><label>Размер / модель<input id="size" maxlength="40" placeholder="42"></label></div><div class="two"><label>Категория<select id="category"><option>Одежда</option><option>Обувь</option><option>Электроника</option><option>Красота</option><option>Дом</option><option>Спорт</option><option>Другое</option></select></label><label>Состояние<select id="condition"><option>Новое</option><option>Как новое</option><option>Очень хорошее</option><option>Хорошее</option><option>Есть следы использования</option></select></label></div><label>Подробности<textarea id="details" maxlength="500" placeholder="Цвет, комплект, особенности, дефекты..."></textarea></label><button class="primary" id="generate">Создать объявление ✨</button><p class="muted center">5 бесплатных генераций сохраняются на этом устройстве.</p></div>
+<div class="card"><h2>Результат</h2><div id="empty" class="empty">Заполни форму — здесь появится готовое объявление.</div><div id="result" class="hidden"><h3 id="title"></h3><pre id="desc"></pre><div id="tags" class="tags"></div><button id="copy" class="secondary">Скопировать всё</button></div></div></div></section>
 
-  <section id="generator" class="app">
-    <div class="panel">
-      <div class="panel-head">
-        <div><small>ШАГ 1</small><h2>Что продаёшь?</h2></div>
-        <div class="counter" id="counter">0/6</div>
-      </div>
+<section id="photo" class="view"><div class="grid"><div class="card"><h2>Фото товара</h2><label class="drop"><input type="file" id="photoFile" accept="image/*"><span>＋ Выбрать фото с iPhone</span><small>JPG, PNG, HEIC — браузер покажет поддерживаемые форматы</small></label><img id="preview" class="preview hidden"><label>Что сделать?<select id="photoMode"><option>Карточка товара</option><option>Чистый студийный фон</option><option>Рекламное фото</option><option>Фото для маркетплейса</option></select></label><label>Пожелания<textarea id="photoPrompt" maxlength="400" placeholder="Например: белый фон, мягкая тень, товар по центру, без изменения логотипа"></textarea></label><button id="preparePhoto" class="primary">Подготовить карточку</button></div><div class="card"><h2>AI-результат</h2><div id="photoEmpty" class="empty">Загрузи фото товара слева.</div><div id="photoReady" class="hidden"><div class="notice"><b>Фото принято ✓</b><p id="photoSummary"></p></div><div class="locked">🤖 Настоящее изменение изображения требует защищённого AI-сервера.<br><small>API-ключ специально не хранится в GitHub.</small></div></div></div></div></section>
 
-      <label>Название товара <span>*</span>
-        <input id="item" maxlength="80" placeholder="Например: Nike Air Max 90">
-      </label>
+<section id="history" class="view"><div class="card"><div class="row"><h2>История</h2><button id="clearHistory" class="ghost">Очистить</button></div><div id="historyList"></div></div></section>
 
-      <div class="grid">
-        <label>Категория
-          <select id="category">
-            <option>Одежда</option><option>Обувь</option><option>Электроника</option>
-            <option>Мебель</option><option>Красота</option><option>Спорт</option><option>Другое</option>
-          </select>
-        </label>
-        <label>Состояние
-          <select id="condition">
-            <option>Новое</option><option>Как новое</option><option>Очень хорошее</option><option>Хорошее</option><option>Есть следы использования</option>
-          </select>
-        </label>
-      </div>
-
-      <div class="grid">
-        <label>Бренд
-          <input id="brand" maxlength="40" placeholder="Nike, Apple, IKEA...">
-        </label>
-        <label>Размер / модель
-          <input id="size" maxlength="40" placeholder="M, 42, 128GB...">
-        </label>
-      </div>
-
-      <label>Что важно указать?
-        <textarea id="details" maxlength="500" placeholder="Например: купил прошлым летом, надевал 3 раза, без пятен и повреждений..."></textarea>
-      </label>
-
-      <label>Язык объявления
-        <select id="language">
-          <option value="ru">Русский</option>
-          <option value="en">English</option>
-        </select>
-      </label>
-
-      <button id="generate" class="generate">Создать объявление ✨</button>
-      <p class="tiny">Нажимая кнопку, ты создаёшь текст автоматически. Никакой регистрации не требуется.</p>
-    </div>
-
-    <div class="panel result-panel">
-      <div class="panel-head">
-        <div><small>ШАГ 2</small><h2>Твой результат</h2></div>
-        <button id="copyAll" class="copy" disabled>Скопировать всё</button>
-      </div>
-      <div id="empty" class="empty">
-        <div class="empty-icon">✍️</div>
-        <b>Здесь появится объявление</b>
-        <p>Заполни форму слева и нажми «Создать объявление».</p>
-      </div>
-      <div id="result" class="result hidden">
-        <div class="result-block"><div class="result-label">ЗАГОЛОВОК <button data-copy="title">копировать</button></div><div id="outTitle" class="out"></div></div>
-        <div class="result-block"><div class="result-label">ОПИСАНИЕ <button data-copy="description">копировать</button></div><div id="outDescription" class="out"></div></div>
-        <div class="result-block"><div class="result-label">ТЕГИ <button data-copy="tags">копировать</button></div><div id="outTags" class="tags"></div></div>
-      </div>
-    </div>
-  </section>
-
-  <section class="money">
-    <div>
-      <div class="badge">💰 Как на этом зарабатывать</div>
-      <h2>Сам генератор — бесплатный.<br>Деньги можно делать на расширениях.</h2>
-      <p>Когда появится трафик, можно добавить платный пакет: массовая генерация, AI-описания, SEO-заголовки, сохранение шаблонов и экспорт.</p>
-    </div>
-    <div class="price-card">
-      <span>PRO</span><strong>£4.99</strong><small>за месяц</small>
-      <button onclick="alert('Здесь позже подключим Stripe/другую оплату.')">Подключить оплату</button>
-    </div>
-  </section>
-</main>
-
-<footer>SellSnap · Сделано для тех, кто хочет продавать быстрее.</footer>
-<script src="script.js"></script>
-</body>
-</html>
+<section class="pricing"><div><span class="badge">ОПЛАТА ПОКА ВЫКЛЮЧЕНА</span><h2>Будущие тарифы</h2><p>Никакие банковские данные сайт сейчас не принимает.</p></div><div class="prices"><div><b>1</b><span>объявление</span><strong>25 ₽</strong></div><div class="best"><b>10</b><span>объявлений</span><strong>149 ₽</strong></div></div></section>
+</main><footer>SellSnap v3 · данные формы и история хранятся только в браузере этого устройства</footer>
+<div id="limit" class="overlay hidden"><div class="modal"><h2>5 бесплатных генераций закончились</h2><p>Оплату пока не подключаем. Тарифы 25 ₽ / 149 ₽ оставлены только как будущий план.</p><button id="limitClose" class="secondary">Понятно</button></div></div>
+<script src="script.js"></script></body></html>
